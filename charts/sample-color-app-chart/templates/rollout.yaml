@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: {{ template "fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    name: {{ template "fullname" . }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+    spec:
+      strategy:
+        {{- if eq .Values.kind "blueGreen" }}
+        {{- include "rollout.blue-green" . | nindent 4 }}
+        {{- end }}
+        {{- if eq .Values.kind "canary" }}
+        {{- include "rollout.canary" . | nindent 4 }}
+        {{- end }}
+      containers:
+        - name: {{ template "fullname" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          resources:
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+            limits:
+              memory: {{ .Values.resources.limits.memory }}
+          ports:
+            - containerPort: 8888
+          env:
+            - name: COLOR
+              value: {{ .Values.color | quote }}

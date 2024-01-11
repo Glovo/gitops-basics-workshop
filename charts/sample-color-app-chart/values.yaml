@@ -1,0 +1,55 @@
+# sample-color-app-chart/values.yaml
+color: "default"
+replicas: 1
+ingress:
+  host: "localhost"
+image:
+  repository: "samuelbaenaglovo/canary-sample-service"
+  tag: "latest"
+resources:
+  requests:
+    cpu: 0.2
+    memory: 400M
+  limits:
+    memory: 512M
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 60
+strategy:
+  blueGreen:
+    config:
+      activeMetadata:
+        labels:
+          role: active
+      previewMetadata:
+        labels:
+          role: preview
+      autoPromotion: true
+      autoPromotionSeconds: 120
+      scaleDownDelaySeconds: 30
+  canary:
+    steps:
+      - setWeight: 20
+      - pause:
+          duration: 2m
+      - setWeight: 40
+      - pause:
+          duration: 2m
+      - setWeight: 60
+      - pause:
+          duration: 2m
+      - setWeight: 100
+    config:
+      canaryMetadata:
+        annotations:
+          role: canary
+        labels:
+          role: canary
+      stableMetadata:
+        annotations:
+          role: stable
+        labels:
+          role: stable
+      scaleDownDelaySeconds: 30
+      maxUnavailable: 0

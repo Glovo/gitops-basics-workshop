@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: gitops-workshop
+  namespace: argo-cd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Project to group all the applications in this namespace
+  sourceRepos:
+  - 'https://github.com/glovo/gitops-basics-workshop'
+
+  # Only permit applications to deploy to this namespace in the same cluster
+  destinations:
+  - namespace: gitops-workshop
+    server: https://kubernetes.default.svc
+
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'

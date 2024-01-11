@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops-workshop
+  namespace: argo-cd
+spec:
+  destination:
+    namespace: gitops-workshop
+    server: 'https://kubernetes.default.svc'
+  project: gitops-workshop
+  source:
+    repoURL: https://github.com/Glovo/gitops-basics-workshop
+    path: charts/sample-color-app-chart
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+      - deployment/kubernetes/test/values.yaml
+  syncPolicy:
+    automated:
+      prune: false
