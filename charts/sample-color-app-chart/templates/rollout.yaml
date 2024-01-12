@@ -10,18 +10,18 @@ spec:
   selector:
     matchLabels:
       app: {{ template "fullname" . }}
+  strategy:
+    {{- if eq .Values.kind "blueGreen" }}
+    {{- include "rollout.blue-green" . | nindent 4 }}
+    {{- end }}
+    {{- if eq .Values.kind "canary" }}
+    {{- include "rollout.canary" . | nindent 4 }}
+    {{- end }}
   template:
     metadata:
       labels:
         app: {{ template "fullname" . }}
     spec:
-      strategy:
-        {{- if eq .Values.kind "blueGreen" }}
-        {{- include "rollout.blue-green" . | nindent 8 }}
-        {{- end }}
-        {{- if eq .Values.kind "canary" }}
-        {{- include "rollout.canary" . | nindent 8 }}
-        {{- end }}
       containers:
         - name: {{ template "fullname" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
