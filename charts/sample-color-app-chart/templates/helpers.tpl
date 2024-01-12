@@ -6,7 +6,7 @@
 {{/*
 This template is used to generate the blue-green rollout strategy for the service.
 */}}
-{{- define "rollout.blue-green" }}
+{{- define "rollout.blue-green" -}}
 blueGreen:
   activeService: {{ include "fullname" . }}-rollout
   previewService: {{ include "fullname" . }}-preview
