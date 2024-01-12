@@ -15,9 +15,11 @@ If this is the first time you heard the term, please read the [first two bullet 
 **PLEASE REPLACE EVERY INSTANCE OF `<YOUR-NAME>` with your name**
 
 ## Requirements
+This workshop is developed in an OSX operative system. Please notice that some things may change in other OS.
+
 You will need:
-* Kubernetes local cluster:
-  You can use kind, k3d or colima for this
+* Kubernetes local cluster (You can use kind, k3d or colima for this):
+    
     Kind:
     ```
      brew install kind
@@ -72,8 +74,8 @@ make dashboard
 
 You may get rid of the port-forward that enables dashboards at any time by running
 ```
-kill $(lsof -i :8888)
-kill $(lsof -i :3100)
+kill $(lsof -t -i :8888)
+kill $(lsof -t -i :3100)
 ```
 
 ### Task 1 - Deploying our Gitops configuration
@@ -230,3 +232,11 @@ Due to a limitation with Custom Headers, some traffic must always go to the new 
    4. Repeate the same curls. Only one color is returned this time.
 
 Custom Headers allow for more matching configurations, more documentation [here](https://argo-rollouts.readthedocs.io/en/stable/features/traffic-management/#traffic-routing-based-on-a-header-values-for-canary)
+
+
+## License
+
+Copyright © 2024 Glovo
+
+Contents of this repository are licensed under the Apache-2.0 License.
+When adding a new commit to this repository and the code is copied from another repository then include the license from the source if is not Apache-2.0 and include a link to the source.
