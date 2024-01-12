@@ -108,15 +108,17 @@ This is creating our ArgoCD Application, the key piece that will track our servi
 1. Check ArgoCD + Argo Rollouts deployment
 A first deployment of the surrounding resources and application will start until eventual completion.
 This may include everything you can be familiar with: secrets, the ingress (ALB), the service, the confimaps with configurations...
-One that you may not recognise is the Rollout. This is the actual CRD that will create the ReplicaSets and lastly the Pods (What would've been created before by Spinnaker)
+One that you may not recognise is the Rollout. This is the actual CRD that will create the ReplicaSets and lastly the Pods
 [IMAGE]
+
 When the rollout is in progress, it's time to go to Argo Rollouts to see what is happening.
 This is where we will handle all the operations to rollback, promote, etc.
 [IMAGE]
+
 Once our Rollout is complete, we're done with the first task
 [IMAGE]
 
-We recommend that you leave both ArgoCD and Argo Rollouts dashboards open in a different screen (If you have two at least)
+We recommend that you leave both ArgoCD and Argo Rollouts dashboards open
 
 ### Task 2 - Operating our application
 
@@ -127,7 +129,8 @@ Gitops tracks changes on the code to trigger a deployment. Let's modify the CPU 
 2. Push the changes to your branch `<YOUR-NAME>-gitops-workflow`
 3. Observe how ArgoCD picks up the change (may take a couple minutes, you can alternative Hard Refresh to speed it up) and triggers a new deployment on Argo Rollouts
 [IMAGE]
-When the pods are stable, a waiting time to rolldown the old deployment will happen, then it will stabilise.
+
+When the pods are stable, a waiting time to downscale the old deployment will happen, then it will stabilise.
 [IMAGE]
 
 ### Rollback
@@ -164,6 +167,7 @@ strategy:
 ```
 1. Push your changes and observe what happens on Argo rollouts
 [IMAGE]
+
   * On the left side you can see the default steps that will happen on a deployment: Set weight of new deploy on 20%, wait for 2 mins, then 40%, wait...
   * In the Summary, you can see the current strategy,the current weight set plus the one on the infra.
   * The rest is pretty much the same as it was
@@ -216,7 +220,6 @@ Due to a limitation with Custom Headers, some traffic must always go to the new 
 3. Here is where things get interesting.
    We have set an indefinite pause, things won't move until we promote the step manually.
    1. Wait until the Custom-Header is active
-   
    [IMAGE]
 
    2. Curl both endpoints and observe the different returned value
