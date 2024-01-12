@@ -4,6 +4,8 @@ kind: Ingress
 metadata:
   name: {{ template "fullname" . }}
   namespace: {{ .Release.Namespace }}
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
   labels:
     name: {{ template "fullname" . }}
 spec:
@@ -15,6 +17,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ template "fullname" . }}
+                name: {{ template "fullname" . }}-rollout
                 port:
                   number: 8888

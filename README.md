@@ -18,19 +18,19 @@ If this is the first time you heard the term, please read the [first two bullet 
 This workshop is developed in an OSX operative system. Please notice that some things may change in other OS.
 
 You will need:
-* Kubernetes local cluster (You can use kind, k3d or colima for this):
+* Kubernetes local cluster (You can use k3d, kind or colima for this):
     
-    Kind:
+    k3d: (recommende for m1)
+    ```
+     brew install k3d
+     k3d cluster create gitops-workshop -p "7777:80@loadbalancer"
+    ```
+    Kind: (Check how map ports to host [here](https://kind.sigs.k8s.io/docs/user/ingress))
     ```
      brew install kind
      kind create cluster --name gitops-workshop
     ```
-    k3d: (recommende for m1)
-    ```
-     brew install k3d
-     k3d cluster create gitops-workshop
-    ```
-    colima: 
+    colima: (Substitute instances of localhost for host.docker.internal or port-forward services)
     ``` 
     brew install colima
     colima start --cpu 2 --memory 2 --disk 10 --kubernetes local-k8s
