@@ -197,12 +197,13 @@ autoscaling:
 When no steps are selected, those are the default ones that happen, but this is completely customisable. 
 1. Let's set our own steps to migrate 50%, lets add the following to values.yaml
 ```
-canary:
-  steps:
-    - setWeight: 50
-    - pause:
-        duration: 30s
-    - setWeight: 100
+strategy:
+  canary:
+    steps:
+      - setWeight: 50
+      - pause:
+          duration: 30s
+      - setWeight: 100
 ```
 2. Push your changes and check Argo Rollouts again
 3. You may check a new deployment by changing any resource
