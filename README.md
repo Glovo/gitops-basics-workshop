@@ -67,7 +67,7 @@ make dashboard
 
 * ArgoCD Dashboard: http://localhost:8888 
   * user: admin
-  * password: Execute `kubectl -n argo-cd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
+  * password: Execute `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
 * Argo Rollouts Dashboard: http://localhost:3100
 
 

@@ -15,8 +15,8 @@ help:
 
 .PHONY: setup
 setup:
-	kubectl create namespace argo-cd || true
-	kubectl apply -n argo-cd -f https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/install.yaml
+	kubectl create namespace argocd || true
+	kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/install.yaml
 	kubectl create namespace argo-rollouts || true
 	kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/argo-rollouts/${ARGO_ROLLOUTS_VERSION}/manifests/install.yaml
 
@@ -24,6 +24,6 @@ setup:
 dashboard:
 	kubectl argo rollouts dashboard -n argo-rollouts > /dev/null &
 	echo
-	kubectl -n argo-cd port-forward deploy/argocd-server ${ARGOCD_DASHBOARD_PORT}:8080 > /dev/null &
+	kubectl -n argocd port-forward deploy/argocd-server ${ARGOCD_DASHBOARD_PORT}:8080 > /dev/null &
 	echo
  
