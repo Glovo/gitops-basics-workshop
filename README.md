@@ -130,9 +130,9 @@ Gitops tracks changes on the code to trigger a deployment. Let's modify the CPU 
 ### Deploy
 1. If your rollout is healthy, you already have your service up and running, visit `localhost:7777` (Or whatever port you mapped your ingress) on your browser
 ![](assets/red.png)
-1. Modify your resources.request.cpu from `0.2` to `0.5` and switch from `color: "red"` to `color: "blue"` on `deployment/kubernetes/test/values.yaml`
-2. Push the changes to your branch `<YOUR-NAME>-gitops-workflow`
-3. Observe how ArgoCD picks up the change (may take a couple minutes, you can alternative Hard Refresh to speed it up) and triggers a new deployment on Argo Rollouts
+2. Modify your resources.request.cpu from `0.2` to `0.5` and switch from `color: "red"` to `color: "blue"` on `deployment/kubernetes/test/values.yaml`
+3. Push the changes to your branch `<YOUR-NAME>-gitops-workflow`
+4. Observe how ArgoCD picks up the change (may take a couple minutes, you can alternative Hard Refresh to speed it up) and triggers a new deployment on Argo Rollouts
 ![](assets/argo_cd_progressing.png)
 
 When the pods are stable, a waiting time to downscale the old deployment will happen, then it will stabilise.
