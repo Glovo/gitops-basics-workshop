@@ -216,19 +216,20 @@ To do this, we have the option to pass the new version setting a Custom Header, 
 
 1. Lets set our steps to the following:
 ```
-canary:
-  steps:
-    - setWeight: 10
-    - setHeaderRoute:
-        name: header-route
-        match:
-          - headerName: Target-Canary
-            headerValue:
-              exact: "true"
-    - pause: {}
-    - setHeaderRoute:
-        name: header-route
-    - setWeight: 100
+strategy:
+  canary:
+    steps:
+      - setWeight: 10
+      - setHeaderRoute:
+          name: header-route
+          match:
+            - headerName: Target-Canary
+              headerValue:
+                exact: "true"
+      - pause: {}
+      - setHeaderRoute:
+          name: header-route
+      - setWeight: 100
 ```
 Due to a limitation with Custom Headers, some traffic must always go to the new version (The initial 10), more on this to be investigated
 
