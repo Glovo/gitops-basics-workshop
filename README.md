@@ -146,7 +146,10 @@ Let's say we wanna rollback what we did, how do we do that?
 1. In Argo Rollouts, select the previous revision and click on rollback
 2. Once you trigger a rollback, Argo Rollouts will scale up those replicas.
 3. This will create a drift on the application, that will be the signal for us to either leave the code back on the old version, or release a hot fix for a new one.
-[IMAGE]
+![](assets/argo_cd_OOS.png)
+
+Your app should be back to red
+![](assets/red.png)
 
 ### Canary deployments
 Now that we know how to deploy and rollback a change, let's get into the world of Canary!
