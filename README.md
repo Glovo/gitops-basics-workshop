@@ -70,7 +70,7 @@ Now, in order to track our ArgoCD and Argo Rollouts, you can make the dashboards
 make dashboard
 ```
 
-* ArgoCD Dashboard: http://localhost:8888 
+* ArgoCD Dashboard: http://localhost:8888 (Accept unsafe browsing)
   * user: admin
   * password: Execute `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
 * Argo Rollouts Dashboard: http://localhost:3100
