@@ -208,13 +208,16 @@ strategy:
 2. Push your changes and check Argo Rollouts again
 3. You may check a new deployment by changing any resource
 
-#### Custom Headers
+#### Custom Headers (**NOT COMPATIBLE WITH WORKSHOP**)
 One last case we want to portrait is Custom Headers.
 In some cases, instead of progressively redirect traffic you may wanna target something specifically. e.g a country, mobile users...
 
-To do this, we have the option to pass the new version setting a Custom Header, this way if the app requests with that header, the new version of our application will receive the request. 
+This features only works with actual traffic with either Istio or ALB Controller as supported systems.  
+If you have access to those, you can try this section of the workshop. It won't work in local.
 
-1. Lets set our steps to the following:
+Let's pass the new version setting a Custom Header, this way if the app requests with that header, the new version of our application will receive the request. 
+
+1. Set our steps to the following:
 ```
 strategy:
   canary:
@@ -237,8 +240,6 @@ Due to a limitation with Custom Headers, some traffic must always go to the new 
 3. Here is where things get interesting.
    We have set an indefinite pause, things won't move until we promote the step manually.
    1. Wait until the Custom-Header is active
-   [IMAGE]
-
    2. Curl both endpoints and observe the different returned value
       * Curl the old deployment by running 
       ```
