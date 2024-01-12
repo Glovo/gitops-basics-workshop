@@ -156,7 +156,7 @@ Now that we know how to deploy and rollback a change, let's get into the world o
 Canary deployments essentially provide us a much finer control of the traffic, allowing for things such as deploying traffic progressively, or split for AB testing.
 
 #### Default behaviour
-1. Our service is currently set in BlueGreen. In order to set the deployment strategy to Canary, let's switch our `values.yaml`
+Our service is currently set in BlueGreen. In order to set the deployment strategy to Canary, let's switch our `values.yaml`
 From
 ```
 kind: blueGreen
@@ -172,6 +172,14 @@ To
 ```
 kind: canary
 ```
+We are also gonna scale up our application to 10 pods to see a real difference on the rollout. Also to add in `values.yaml`
+```
+autoscaling:
+  minReplicas: 10
+  maxReplicas: 10
+```
+
+
 1. Push your changes and observe what happens on Argo rollouts
 [IMAGE]
 
