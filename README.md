@@ -60,7 +60,7 @@ Make sure you're connected to your cluster and execute
 make setup
 ``` 
 
-Now we want to keep track of our ArgoCD and Argo Rollouts, you can make the dashboards available by running
+Wait until all pods are up, then in order to track our ArgoCD and Argo Rollouts, you can make the dashboards available by running
 ```
 make dashboard
 ```
