@@ -114,14 +114,12 @@ This is creating our ArgoCD Application, the key piece that will track our servi
 A first deployment of the surrounding resources and application will start until eventual completion.
 This may include everything you can be familiar with: secrets, the ingress (ALB), the service, the confimaps with configurations...
 One that you may not recognise is the Rollout. This is the actual CRD that will create the ReplicaSets and lastly the Pods
-[IMAGE]
+![](assets/argo_cd_baseline.png)
 
 When the rollout is in progress, it's time to go to Argo Rollouts to see what is happening.
 This is where we will handle all the operations to rollback, promote, etc.
-[IMAGE]
-
 Once our Rollout is complete, we're done with the first task
-[IMAGE]
+![](assets/argo_rollouts_baseline.png)
 
 We recommend that you leave both ArgoCD and Argo Rollouts dashboards open
 
