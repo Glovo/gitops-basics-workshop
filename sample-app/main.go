@@ -40,7 +40,7 @@ func colorHandler(w http.ResponseWriter, r *http.Request) {
 	// Check if the request is coming from curl
 	userAgent := r.Header.Get("User-Agent")
 	if strings.Contains(userAgent, "curl") {
-		w.Write([]byte(fmt.Sprintf("Requested color: %s\n", color)))
+		w.Write([]byte(fmt.Sprintf("Requested color: %s\n", template.HTMLEscapeString(color))))
 		return
 	}
 
