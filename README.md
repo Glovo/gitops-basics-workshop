@@ -181,14 +181,14 @@ autoscaling:
 
 
 1. Push your changes and observe what happens on Argo rollouts
-[IMAGE]
+![](assets/canary.png)
 
   * On the left side you can see the default steps that will happen on a deployment: Set weight of new deploy on 20%, wait for 2 mins, then 40%, wait...
-  * In the Summary, you can see the current strategy,the current weight set plus the one on the infra.
+  * In the Summary, you can see the current strategy,the current weight set plus the actual one on the infra (In case we're using a strategy that doesn't allow for a perfect 1to1 match, such as 20% of 3 pods).
   * The rest is pretty much the same as it was
 
-1. Let's deploy a new version of the app by updating the color from `color: "blue"` to `color: "green"`
-2. The different steps will happen, now this is important
+2. Let's deploy a new version of the app by updating the color from `color: "blue"` to `color: "green"`
+3. The different steps will happen, now this is important
   * To skip one step, click on Promote
   * To skip the entire canary up to 100%, click on PromoteFull
 **THIS ALLOWS FOR A QUICK PROMOTION ON HOTFIXES**
