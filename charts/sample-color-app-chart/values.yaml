@@ -1,6 +1,5 @@
 # sample-color-app-chart/values.yaml
 color: "default"
-replicas: 1
 ingress:
   host: "localhost"
 image:
