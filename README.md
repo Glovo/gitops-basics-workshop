@@ -30,12 +30,6 @@ You will need:
      brew install kind
      kind create cluster --name gitops-workshop
     ```
-    colima: (Substitute instances of localhost for host.docker.internal or port-forward services)
-    ``` 
-    brew install colima
-    colima start --cpu 2 --memory 2 --disk 10 --kubernetes local-k8s
-    colima kubernetes start
-    ```
 * [kubectl command-line tool installed and configured](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/)
 * [kubectx command-line tool installed and configured](https://github.com/ahmetb/kubectx#homebrew-macos-and-linux)
 * Lab Environment Setup
@@ -254,6 +248,21 @@ Due to a limitation with Custom Headers, some traffic must always go to the new 
 
 Custom Headers allow for more matching configurations, more documentation [here](https://argo-rollouts.readthedocs.io/en/stable/features/traffic-management/#traffic-routing-based-on-a-header-values-for-canary)
 
+
+## Closing notes
+You have arrived to the end of the workshop. Thank you so much for your time and we hope you found it useful.
+Feel free to open issues or PRs for doubts and improvements.
+
+You may now delete your local cluster
+
+k3d: 
+```
+k3d cluster delete gitops-workshop
+```
+Kind:
+```
+kind delete cluster --name gitops-workshop
+```
 
 ## License
 
