@@ -62,7 +62,7 @@ make setup
 
 Wait until all pods are up
 ```
-kubectl -n argocd get pods -w
+watch kubectl -n argocd get pods
 ```
 
 Now, in order to track our ArgoCD and Argo Rollouts, you can make the dashboards available by running
