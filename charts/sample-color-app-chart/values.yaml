@@ -52,5 +52,4 @@ strategy:
           role: stable
         labels:
           role: stable
-      scaleDownDelaySeconds: 30
       maxUnavailable: 0

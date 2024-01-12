@@ -29,7 +29,6 @@ canary:
   stableMetadata:
     {{- toYaml .Values.strategy.canary.config.stableMetadata | nindent 4 }}
   minPodsPerReplicaSet: {{ .Values.autoscaling.minReplicas }}
-  scaleDownDelaySeconds: {{ .Values.strategy.canary.config.scaleDownDelaySeconds }}
   maxSurge: "25%"
   maxUnavailable: {{ .Values.strategy.canary.config.maxUnavailable  }}
   steps:

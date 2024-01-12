@@ -171,10 +171,6 @@ strategy:
 To
 ```
 kind: canary
-strategy:
-  canary:
-    config:
-      scaleDownDelaySeconds: 30 
 ```
 1. Push your changes and observe what happens on Argo rollouts
 [IMAGE]
