@@ -23,12 +23,12 @@ You will need:
     Kind:
     ```
      brew install kind
-     kind create cluster --name gitops-workshop-sample
+     kind create cluster --name gitops-workshop
     ```
     k3d: (recommende for m1)
     ```
      brew install k3d
-     k3d cluster create gitops-workshop-sample
+     k3d cluster create gitops-workshop
     ```
     colima: 
     ``` 
