@@ -17,22 +17,22 @@ spec:
     spec:
       strategy:
         {{- if eq .Values.kind "blueGreen" }}
-        {{- include "rollout.blue-green" . | nindent 4 }}
+        {{- include "rollout.blue-green" . | nindent 8 }}
         {{- end }}
         {{- if eq .Values.kind "canary" }}
-        {{- include "rollout.canary" . | nindent 4 }}
+        {{- include "rollout.canary" . | nindent 8 }}
         {{- end }}
       containers:
-      - name: {{ template "fullname" . }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        resources:
-          requests:
-            cpu: {{ .Values.resources.requests.cpu }}
-            memory: {{ .Values.resources.requests.memory }}
-          limits:
-            memory: {{ .Values.resources.limits.memory }}
-        ports:
-          - containerPort: 8888
-        env:
-          - name: COLOR
-            value: {{ .Values.color | quote }}
+        - name: {{ template "fullname" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          resources:
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+            limits:
+              memory: {{ .Values.resources.limits.memory }}
+          ports:
+            - containerPort: 8888
+          env:
+            - name: COLOR
+              value: {{ .Values.color | quote }}
