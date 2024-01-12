@@ -23,16 +23,16 @@ spec:
         {{- include "rollout.canary" . | nindent 4 }}
         {{- end }}
       containers:
-        - name: {{ template "fullname" . }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          resources:
-            requests:
-              cpu: {{ .Values.resources.requests.cpu }}
-              memory: {{ .Values.resources.requests.memory }}
-            limits:
-              memory: {{ .Values.resources.limits.memory }}
-          ports:
-            - containerPort: 8888
-          env:
-            - name: COLOR
-              value: {{ .Values.color | quote }}
+      - name: {{ template "fullname" . }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+        ports:
+          - containerPort: 8888
+        env:
+          - name: COLOR
+            value: {{ .Values.color | quote }}
