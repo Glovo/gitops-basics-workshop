@@ -1,0 +1,6 @@
+# sample-color-app-chart/Chart.yaml
+apiVersion: v2
+name: sample-color-app
+description: A Helm chart for the Go application
+version: 0.1.0
+
