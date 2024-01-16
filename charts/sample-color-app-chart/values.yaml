@@ -12,10 +12,10 @@ resources:
   limits:
     memory: 512M
 autoscaling:
-  minReplicas: 1
-  maxReplicas: 1
+  minReplicas: 10
+  maxReplicas: 10
   targetCPUUtilizationPercentage: 60
-kind: blueGreen
+kind: canary
 strategy:
   blueGreen:
     config:
