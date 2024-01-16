@@ -46,17 +46,17 @@ You will need:
 * Clone the workshop repository:
 
 ```
-make checkout <YOUR-NAME
+source ./configure.sh checkout <YOUR-NAME>
 ```
 
 ## Tasks
 ### Task 0 - Setting up ArgoCD + Argo Rollouts
 In order to have a Gitops-like deployment, we need a combination of ArgoCD which will track the code for changes and Argo Rollouts which will enable us to have different deployment strategies and options.
 
-We have written a makefile to ease up the local installation of ArgoCD and Argo Rollouts. 
+We have written a script to ease up the local installation of ArgoCD and Argo Rollouts. 
 Make sure you're connected to your cluster and execute
 ```
-make setup
+./configure.sh setup
 ``` 
 
 Wait until all pods are up
@@ -64,9 +64,9 @@ Wait until all pods are up
 watch kubectl -n argocd get pods
 ```
 
-Now, in order to track our ArgoCD and Argo Rollouts, you can make the dashboards available by running
+Now, in order to track our ArgoCD and Argo Rollouts, you can create the dashboards available by running
 ```
-make dashboard
+./configure.sh  dashboard
 ```
 
 * ArgoCD Dashboard: http://localhost:8888 (Accept unsafe browsing)
