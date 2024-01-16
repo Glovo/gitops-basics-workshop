@@ -90,6 +90,7 @@ const htmlTemplate = `
 			font-size: 24px;
 			text-align: center;
 			margin-top: 50px;
+			brightness(0);
 		}
 	</style>
 </head>

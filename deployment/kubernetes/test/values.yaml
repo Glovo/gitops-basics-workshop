@@ -1,12 +1,15 @@
 # sample-color-app-chart/values.yaml
-color: "red"
+color: "blue"
 resources:
   requests:
-    cpu: 0.2
-    memory: 400M
+    cpu: 0.1
+    memory: 40M
   limits:
-    memory: 512M
-kind: blueGreen
+    memory: 40M
+kind: canary
+autoscaling:
+  minReplicas: 10
+  maxReplicas: 10
 strategy:
   blueGreen:
     config:
