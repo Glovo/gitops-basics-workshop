@@ -6,7 +6,7 @@ resources:
     memory: 400M
   limits:
     memory: 512M
-kind: Canary
+kind: canary
 strategy:
   blueGreen:
     config:
