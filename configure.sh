@@ -31,7 +31,7 @@ setup() {
 }
 
 dashboard() {
-  brew install argoproj/tap/kubectl-argo-rollouts
+  brew install argoproj/tap/kubectl-argo-rollouts > /dev/null
   kubectl argo rollouts dashboard -n argo-rollouts > /dev/null &
   echo
   kubectl -n argocd port-forward deploy/argocd-server ${ARGOCD_DASHBOARD_PORT}:8080 > /dev/null &
