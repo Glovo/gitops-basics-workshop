@@ -17,17 +17,6 @@ autoscaling:
   targetCPUUtilizationPercentage: 60
 kind: canary
 strategy:
-  blueGreen:
-    config:
-      activeMetadata:
-        labels:
-          role: active
-      previewMetadata:
-        labels:
-          role: preview
-      autoPromotion: true
-      autoPromotionSeconds: 120
-      scaleDownDelaySeconds: 30
   canary:
     steps:
       - setWeight: 20
