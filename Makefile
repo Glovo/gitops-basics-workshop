@@ -22,6 +22,7 @@ setup:
 
 .PHONY: dashboard
 dashboard:
+	brew install argoproj/tap/kubectl-argo-rollouts
 	kubectl argo rollouts dashboard -n argo-rollouts > /dev/null &
 	echo
 	kubectl -n argocd port-forward deploy/argocd-server ${ARGOCD_DASHBOARD_PORT}:8080 > /dev/null &

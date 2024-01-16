@@ -18,6 +18,16 @@ If this is the first time you heard the term, please read the [first two bullet 
 This workshop is developed in an OSX operative system. Please notice that some things may change in other OS.
 
 You will need:
+* Docker in your system
+  For Linux: [LINK](https://docs.docker.com/desktop/install/linux-install/)
+
+  For OSX:
+  With Colima
+  ```
+  brew install colima
+  colima start --cpu 4 --memory 8 --disk 10
+  ```
+  With Docker Desktop: [LINK](https://docs.docker.com/desktop/install/mac-install/)
 * Kubernetes local cluster (You can use k3d, kind or colima for this):
     
     k3d: (recommende for m1)
@@ -66,7 +76,9 @@ make dashboard
 
 * ArgoCD Dashboard: http://localhost:8888 (Accept unsafe browsing)
   * user: admin
-  * password: Execute `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
+  * password: 
+    * Execute `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
+    * Don't copy the last `%`
 * Argo Rollouts Dashboard: http://localhost:3100
 
 
@@ -110,8 +122,9 @@ This may include everything you can be familiar with: secrets, the ingress (ALB)
 One that you may not recognise is the Rollout. This is the actual CRD that will create the ReplicaSets and lastly the Pods
 ![](assets/argo_cd_baseline.png)
 
-When the rollout is in progress, it's time to go to Argo Rollouts to see what is happening.
-This is where we will handle all the operations to rollback, promote, etc.
+  When the rollout is in progress, it's time to go to Argo Rollouts to see what is happening.
+This is where we will handle all the operations to rollback, promote, etc.  
+Select the right namespace on the top-right of Argo Rollouts.  
 Once our Rollout is complete, we're done with the first task
 ![](assets/argo_rollouts_baseline.png)
 
