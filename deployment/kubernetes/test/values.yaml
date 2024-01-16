@@ -6,7 +6,10 @@ resources:
     memory: 400M
   limits:
     memory: 512M
-kind: blueGreen
+kind: canary
+autoscaling:
+  minReplicas: 10
+  maxReplicas: 10
 strategy:
   blueGreen:
     config:
