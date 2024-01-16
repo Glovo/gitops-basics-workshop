@@ -1,7 +1,7 @@
 # Gitops Basics Workshop
 Welcome to the Gitops Basics Workshop!
 
-Gitops presents a series of changes, challenges and advantages vs a more imperative approach. 
+Gitops presents a series of changes, challenges and advantages vs a more imperative approach.
 In this session we're gonna focus on understanding the following:
 
 * How do we deploy a gitops service
@@ -9,17 +9,17 @@ In this session we're gonna focus on understanding the following:
 * Rollbacks, promotions, operability
 * Canary deployments and how to reduce blast radius
 
-A basic understanding of what gitops means is necessary. 
+A basic understanding of what gitops means is necessary.
 If this is the first time you heard the term, please read the [first two bullet points of the following documentation](https://www.redhat.com/en/topics/devops/what-is-gitops)
 
-**PLEASE REPLACE EVERY INSTANCE OF `<YOUR-NAME>` with your name**
+**PLEASE REPLACE EVERY INSTANCE OF `braulio` with your name**
 
 ## Requirements
 This workshop is developed in an OSX operative system. Please notice that some things may change in other OS.
 
 You will need:
 * Kubernetes local cluster (You can use k3d, kind or colima for this):
-    
+
     k3d: (recommende for m1)
     ```
      brew install k3d
@@ -38,21 +38,21 @@ You will need:
 ```
 git clone https://github.com/Glovo/gitops-basics-workshop.git
 cd gitops-basics-workshop
-git checkout -b <YOUR-NAME>-gitops-workshop
-git add . #AFTER YOU HAVE RENAMED EVERY INSTANCE OF `<YOUR-NAME>` with your name
-git commit -m "Rename placeholder with name" 
-git push -u origin <YOUR-NAME>-gitops-workshop
+git checkout -b braulio-gitops-workshop
+git add . #AFTER YOU HAVE RENAMED EVERY INSTANCE OF `braulio` with your name
+git commit -m "Rename placeholder with name"
+git push -u origin braulio-gitops-workshop
 ```
 
 ## Tasks
 ### Task 0 - Setting up ArgoCD + Argo Rollouts
 In order to have a Gitops-like deployment, we need a combination of ArgoCD which will track the code for changes and Argo Rollouts which will enable us to have different deployment strategies and options.
 
-We have written a makefile to ease up the local installation of ArgoCD and Argo Rollouts. 
+We have written a makefile to ease up the local installation of ArgoCD and Argo Rollouts.
 Make sure you're connected to your cluster and execute
 ```
 make setup
-``` 
+```
 
 Wait until all pods are up
 ```
@@ -86,7 +86,7 @@ In order to get our service running, we need to understand that there's more tha
 
 In this first task we're gonna focus on the third step first.
 
-**REMEMBER TO RENAME EVERY `<YOUR-NAME>` IN THE REPO BEFORE PROCEEDING**
+**REMEMBER TO RENAME EVERY `braulio` IN THE REPO BEFORE PROCEEDING**
 
 1. Install the dependencies
 ```
@@ -125,7 +125,7 @@ Gitops tracks changes on the code to trigger a deployment. Let's modify the CPU 
 1. If your rollout is healthy, you already have your service up and running, visit `localhost:7777` (Or whatever port you mapped your ingress) on your browser
 ![](assets/red.png)
 2. Modify your resources.request.cpu from `0.2` to `0.5` and switch from `color: "red"` to `color: "blue"` on `deployment/kubernetes/test/values.yaml`
-3. Push the changes to your branch `<YOUR-NAME>-gitops-workflow`
+3. Push the changes to your branch `braulio-gitops-workflow`
 4. Observe how ArgoCD picks up the change (may take a couple minutes, you can alternative Hard Refresh to speed it up) and triggers a new deployment on Argo Rollouts
 ![](assets/argo_cd_progressing.png)
 
@@ -188,7 +188,7 @@ autoscaling:
 **THIS ALLOWS FOR A QUICK PROMOTION ON HOTFIXES**
 
 #### Customising steps
-When no steps are selected, those are the default ones that happen, but this is completely customisable. 
+When no steps are selected, those are the default ones that happen, but this is completely customisable.
 1. Let's set our own steps to migrate 50%, lets add the following to values.yaml
 ```
 strategy:
@@ -206,10 +206,10 @@ strategy:
 One last case we want to portrait is Custom Headers.
 In some cases, instead of progressively redirect traffic you may wanna target something specifically. e.g a country, mobile users...
 
-This features only works with actual traffic with either Istio or ALB Controller as supported systems.  
+This features only works with actual traffic with either Istio or ALB Controller as supported systems.
 If you have access to those, you can try this section of the workshop. It won't work in local.
 
-Let's pass the new version setting a Custom Header, this way if the app requests with that header, the new version of our application will receive the request. 
+Let's pass the new version setting a Custom Header, this way if the app requests with that header, the new version of our application will receive the request.
 
 1. Set our steps to the following:
 ```
@@ -235,7 +235,7 @@ Due to a limitation with Custom Headers, some traffic must always go to the new 
    We have set an indefinite pause, things won't move until we promote the step manually.
    1. Wait until the Custom-Header is active
    2. Curl both endpoints and observe the different returned value
-      * Curl the old deployment by running 
+      * Curl the old deployment by running
       ```
       curl http://localhost
       ```
@@ -255,7 +255,7 @@ Feel free to open issues or PRs for doubts and improvements.
 
 You may now delete your local cluster
 
-k3d: 
+k3d:
 ```
 k3d cluster delete gitops-workshop
 ```

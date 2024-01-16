@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/Glovo/gitops-basics-workshop
     path: charts/sample-color-app-chart
-    targetRevision: <YOUR-NAME>-gitops-workshop
+    targetRevision: braulio-gitops-workshop
     helm:
       valueFiles:
         - ../../deployment/kubernetes/test/values.yaml
