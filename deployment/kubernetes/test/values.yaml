@@ -1,15 +1,18 @@
 # sample-color-app-chart/values.yaml
-color: "green"
+color: "red"
 resources:
   requests:
     cpu: 0.2
     memory: 400M
   limits:
     memory: 512M
-kind: blueGreen
+kind: canary
 strategy:
   blueGreen:
     config:
       autoPromotion: true
       autoPromotionSeconds: 30
       scaleDownDelaySeconds: 30
+autoscaling:
+  minReplicas: 10
+  maxReplicas: 10
