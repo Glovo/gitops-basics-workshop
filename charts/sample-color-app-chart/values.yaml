@@ -1,5 +1,5 @@
 # sample-color-app-chart/values.yaml
-color: "default"
+color: "red"
 ingress:
   host: "localhost"
 image:
@@ -7,7 +7,7 @@ image:
   tag: "latest"
 resources:
   requests:
-    cpu: 0.2
+    cpu: 0.5
     memory: 400M
   limits:
     memory: 512M
