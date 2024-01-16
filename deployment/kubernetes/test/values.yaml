@@ -2,10 +2,10 @@
 color: "blue"
 resources:
   requests:
-    cpu: 0.2
-    memory: 400M
+    cpu: 0.1
+    memory: 40M
   limits:
-    memory: 512M
+    memory: 40M
 kind: canary
 autoscaling:
   minReplicas: 10
