@@ -1,8 +1,8 @@
 # sample-color-app-chart/values.yaml
-color: "red"
+color: "blue"
 resources:
   requests:
-    cpu: 0.2
+    cpu: 0.5
     memory: 400M
   limits:
     memory: 512M
