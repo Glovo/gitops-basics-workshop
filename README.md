@@ -18,6 +18,16 @@ If this is the first time you heard the term, please read the [first two bullet 
 This workshop is developed in an OSX operative system. Please notice that some things may change in other OS.
 
 You will need:
+* Docker in your system
+  For Linux: [LINK](https://docs.docker.com/desktop/install/linux-install/)
+
+  For OSX:
+  With Colima
+  ```
+  brew install colima
+  colima start --cpu 4 --memory 8 --disk 10
+  ```
+  With Docker Desktop: [LINK](https://docs.docker.com/desktop/install/mac-install/)
 * Kubernetes local cluster (You can use k3d, kind or colima for this):
     
     k3d: (recommende for m1)
@@ -36,22 +46,17 @@ You will need:
 * Clone the workshop repository:
 
 ```
-git clone https://github.com/Glovo/gitops-basics-workshop.git
-cd gitops-basics-workshop
-git checkout -b <YOUR-NAME>-gitops-workshop
-git add . #AFTER YOU HAVE RENAMED EVERY INSTANCE OF `<YOUR-NAME>` with your name
-git commit -m "Rename placeholder with name" 
-git push -u origin <YOUR-NAME>-gitops-workshop
+source ./configure.sh checkout <YOUR-NAME>
 ```
 
 ## Tasks
 ### Task 0 - Setting up ArgoCD + Argo Rollouts
 In order to have a Gitops-like deployment, we need a combination of ArgoCD which will track the code for changes and Argo Rollouts which will enable us to have different deployment strategies and options.
 
-We have written a makefile to ease up the local installation of ArgoCD and Argo Rollouts. 
+We have written a script to ease up the local installation of ArgoCD and Argo Rollouts. 
 Make sure you're connected to your cluster and execute
 ```
-make setup
+./configure.sh setup
 ``` 
 
 Wait until all pods are up
@@ -59,14 +64,16 @@ Wait until all pods are up
 watch kubectl -n argocd get pods
 ```
 
-Now, in order to track our ArgoCD and Argo Rollouts, you can make the dashboards available by running
+Now, in order to track our ArgoCD and Argo Rollouts, you can create the dashboards available by running
 ```
-make dashboard
+./configure.sh  dashboard
 ```
 
 * ArgoCD Dashboard: http://localhost:8888 (Accept unsafe browsing)
   * user: admin
-  * password: Execute `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
+  * password: 
+    * Execute `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
+    * Don't copy the last `%`
 * Argo Rollouts Dashboard: http://localhost:3100
 
 
@@ -111,7 +118,8 @@ One that you may not recognise is the Rollout. This is the actual CRD that will 
 ![](assets/argo_cd_baseline.png)
 
 When the rollout is in progress, it's time to go to Argo Rollouts to see what is happening.
-This is where we will handle all the operations to rollback, promote, etc.
+This is where we will handle all the operations to rollback, promote, etc.  
+Select the right namespace on the top-right of Argo Rollouts.  
 Once our Rollout is complete, we're done with the first task
 ![](assets/argo_rollouts_baseline.png)
 
@@ -124,12 +132,12 @@ Gitops tracks changes on the code to trigger a deployment. Let's modify the CPU 
 ### Deploy
 1. If your rollout is healthy, you already have your service up and running, visit `localhost:7777` (Or whatever port you mapped your ingress) on your browser
 ![](assets/red.png)
-2. Modify your resources.request.cpu from `0.2` to `0.5` and switch from `color: "red"` to `color: "blue"` on `deployment/kubernetes/test/values.yaml`
+2. Modify your `color: "red"` to `color: "blue"` on `deployment/kubernetes/test/values.yaml`
 3. Push the changes to your branch `<YOUR-NAME>-gitops-workflow`
 4. Observe how ArgoCD picks up the change (may take a couple minutes, you can alternative Hard Refresh to speed it up) and triggers a new deployment on Argo Rollouts
 ![](assets/argo_cd_progressing.png)
 
-When the pods are stable, a waiting time to downscale the old deployment will happen, then it will stabilise.
+The order of actions will be, first the new up will be up and stable, then a waiting time where the old Revision is up and active happens (autopromotionSeconds), finally, the new Revision is active and the old will dowscale, then it will stabilise.
 ![](assets/argo_rollouts_progressing.png)
 
 Now that the app has been deployed, go back to your `localhost:7777` to see the changed color
@@ -150,7 +158,7 @@ Now that we know how to deploy and rollback a change, let's get into the world o
 Canary deployments essentially provide us a much finer control of the traffic, allowing for things such as deploying traffic progressively, or split for AB testing.
 
 #### Default behaviour
-Our service is currently set in BlueGreen. In order to set the deployment strategy to Canary, let's switch our `values.yaml`
+Our service is currently set in BlueGreen. In order to set the deployment strategy to Canary, let's switch our `deployment/kubernetes/test/values.yaml`
 From
 ```
 kind: blueGreen
@@ -166,7 +174,7 @@ To
 ```
 kind: canary
 ```
-We are also gonna scale up our application to 10 pods to see a real difference on the rollout. Also to add in `values.yaml`
+We are also gonna scale up our application to 10 pods to see a real difference on the rollout. Also to add in `deployment/kubernetes/test/values.yaml`
 ```
 autoscaling:
   minReplicas: 10
@@ -189,7 +197,7 @@ autoscaling:
 
 #### Customising steps
 When no steps are selected, those are the default ones that happen, but this is completely customisable. 
-1. Let's set our own steps to migrate 50%, lets add the following to values.yaml
+1. Let's set our own steps to migrate 50%, lets add the following to `deployment/kubernetes/test/values.yaml``
 ```
 strategy:
   canary:
@@ -237,11 +245,11 @@ Due to a limitation with Custom Headers, some traffic must always go to the new 
    2. Curl both endpoints and observe the different returned value
       * Curl the old deployment by running 
       ```
-      curl http://localhost
+      curl http://<YOUR-CLUSTER-IP>
       ```
       * Curl the new deployment 10 times by running
       ```
-      curl -H "Target-Canary=true" http://localhost
+      curl -H "Target-Canary=true" http://<YOUR-CLUSTER-IP>
       ```
    3. Promote your app deployment on Argo Rollout
    4. Repeate the same curls. Only one color is returned this time.
