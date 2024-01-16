@@ -137,12 +137,12 @@ Gitops tracks changes on the code to trigger a deployment. Let's modify the CPU 
 ### Deploy
 1. If your rollout is healthy, you already have your service up and running, visit `localhost:7777` (Or whatever port you mapped your ingress) on your browser
 ![](assets/red.png)
-2. Modify your resources.request.cpu from `0.2` to `0.5` and switch from `color: "red"` to `color: "blue"` on `deployment/kubernetes/test/values.yaml`
+2. Modify your `color: "red"` to `color: "blue"` on `deployment/kubernetes/test/values.yaml`
 3. Push the changes to your branch `<YOUR-NAME>-gitops-workflow`
 4. Observe how ArgoCD picks up the change (may take a couple minutes, you can alternative Hard Refresh to speed it up) and triggers a new deployment on Argo Rollouts
 ![](assets/argo_cd_progressing.png)
 
-When the pods are stable, a waiting time to downscale the old deployment will happen, then it will stabilise.
+The order of actions will be, first the new up will be up and stable, then a waiting time where the old Revision is up and active happens (autopromotionSeconds), finally, the new Revision is active and the old will dowscale, then it will stabilise.
 ![](assets/argo_rollouts_progressing.png)
 
 Now that the app has been deployed, go back to your `localhost:7777` to see the changed color
@@ -163,7 +163,7 @@ Now that we know how to deploy and rollback a change, let's get into the world o
 Canary deployments essentially provide us a much finer control of the traffic, allowing for things such as deploying traffic progressively, or split for AB testing.
 
 #### Default behaviour
-Our service is currently set in BlueGreen. In order to set the deployment strategy to Canary, let's switch our `values.yaml`
+Our service is currently set in BlueGreen. In order to set the deployment strategy to Canary, let's switch our `deployment/kubernetes/test/values.yaml`
 From
 ```
 kind: blueGreen
@@ -179,7 +179,7 @@ To
 ```
 kind: canary
 ```
-We are also gonna scale up our application to 10 pods to see a real difference on the rollout. Also to add in `values.yaml`
+We are also gonna scale up our application to 10 pods to see a real difference on the rollout. Also to add in `deployment/kubernetes/test/values.yaml`
 ```
 autoscaling:
   minReplicas: 10
@@ -202,7 +202,7 @@ autoscaling:
 
 #### Customising steps
 When no steps are selected, those are the default ones that happen, but this is completely customisable. 
-1. Let's set our own steps to migrate 50%, lets add the following to values.yaml
+1. Let's set our own steps to migrate 50%, lets add the following to `deployment/kubernetes/test/values.yaml``
 ```
 strategy:
   canary:
@@ -250,11 +250,11 @@ Due to a limitation with Custom Headers, some traffic must always go to the new 
    2. Curl both endpoints and observe the different returned value
       * Curl the old deployment by running 
       ```
-      curl http://localhost
+      curl http://<YOUR-CLUSTER-IP>
       ```
       * Curl the new deployment 10 times by running
       ```
-      curl -H "Target-Canary=true" http://localhost
+      curl -H "Target-Canary=true" http://<YOUR-CLUSTER-IP>
       ```
    3. Promote your app deployment on Argo Rollout
    4. Repeate the same curls. Only one color is returned this time.
