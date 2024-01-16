@@ -10,8 +10,19 @@ help:
 	@echo "Usage: make <target>"
 	@echo ""
 	@echo "Targets:"
+	@echo "  checkout:		Checkout branch and pushes it with '$1' name"
 	@echo "  setup			Install Argo CD and Argo Rollouts"
 	@echo "  dashboard		Open Argo CD and Argo Rollouts dashboards"
+
+
+.PHONY: checkout
+checkout:
+	git clone https://github.com/Glovo/gitops-basics-workshop.git
+	cd gitops-basics-workshop
+	git checkout -b $(MAKECMDGOALS)-gitops-workshop
+	git add .
+	git commit -m "Rename placeholder with name" 
+	git push -u origin $(MAKECMDGOALS)-gitops-workshop
 
 .PHONY: setup
 setup:

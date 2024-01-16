@@ -46,12 +46,7 @@ You will need:
 * Clone the workshop repository:
 
 ```
-git clone https://github.com/Glovo/gitops-basics-workshop.git
-cd gitops-basics-workshop
-git checkout -b <YOUR-NAME>-gitops-workshop
-git add . #AFTER YOU HAVE RENAMED EVERY INSTANCE OF `<YOUR-NAME>` with your name
-git commit -m "Rename placeholder with name" 
-git push -u origin <YOUR-NAME>-gitops-workshop
+make checkout <YOUR-NAME
 ```
 
 ## Tasks
