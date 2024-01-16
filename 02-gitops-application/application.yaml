@@ -12,7 +12,7 @@ spec:
     repoURL: https://github.com/Glovo/gitops-basics-workshop
     path: charts/sample-color-app-chart
     targetRevision: nahuel-gitops-workshop
-    helm:
+    helm:kc
       valueFiles:
         - ../../deployment/kubernetes/test/values.yaml
   syncPolicy:
