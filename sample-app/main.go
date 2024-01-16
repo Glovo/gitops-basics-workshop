@@ -68,13 +68,13 @@ func renderTemplate(w http.ResponseWriter, data PageVariables) {
 func getColorCode(color string) string {
 	switch color {
 	case "red":
-		return "#FF0000"
+		return "#FF6666"
 	case "green":
-		return "#00FF00"
+		return "#47B247"
 	case "blue":
-		return "#0000FF"
+		return "#6FA8DC"
 	case "yellow":
-		return "#FFFF00"
+		return "#f8e098"
 	default:
 		return "#000000" // Default color (black)
 	}
