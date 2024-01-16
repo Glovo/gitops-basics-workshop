@@ -2,10 +2,10 @@
 color: "red"
 resources:
   requests:
-    cpu: 50mi
-    memory: 40M
+    cpu: 50m
+    memory: 40Mi
   limits:
-    memory: 51M
+    memory: 51Mi
 kind: canary
 strategy:
   blueGreen:
