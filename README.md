@@ -12,7 +12,7 @@ In this session we're gonna focus on understanding the following:
 A basic understanding of what gitops means is necessary. 
 If this is the first time you heard the term, please read the [first two bullet points of the following documentation](https://www.redhat.com/en/topics/devops/what-is-gitops)
 
-**PLEASE REPLACE EVERY INSTANCE OF `<YOUR-NAME>` with your name**
+**PLEASE REPLACE EVERY INSTANCE OF `dimitris` with your name**
 
 ## Requirements
 This workshop is developed in an OSX operative system. Please notice that some things may change in other OS.
@@ -38,10 +38,10 @@ You will need:
 ```
 git clone https://github.com/Glovo/gitops-basics-workshop.git
 cd gitops-basics-workshop
-git checkout -b <YOUR-NAME>-gitops-workshop
-git add . #AFTER YOU HAVE RENAMED EVERY INSTANCE OF `<YOUR-NAME>` with your name
+git checkout -b dimitris-gitops-workshop
+git add . #AFTER YOU HAVE RENAMED EVERY INSTANCE OF `dimitris` with your name
 git commit -m "Rename placeholder with name" 
-git push -u origin <YOUR-NAME>-gitops-workshop
+git push -u origin dimitris-gitops-workshop
 ```
 
 ## Tasks
@@ -86,7 +86,7 @@ In order to get our service running, we need to understand that there's more tha
 
 In this first task we're gonna focus on the third step first.
 
-**REMEMBER TO RENAME EVERY `<YOUR-NAME>` IN THE REPO BEFORE PROCEEDING**
+**REMEMBER TO RENAME EVERY `dimitris` IN THE REPO BEFORE PROCEEDING**
 
 1. Install the dependencies
 ```
@@ -125,7 +125,7 @@ Gitops tracks changes on the code to trigger a deployment. Let's modify the CPU 
 1. If your rollout is healthy, you already have your service up and running, visit `localhost:7777` (Or whatever port you mapped your ingress) on your browser
 ![](assets/red.png)
 2. Modify your resources.request.cpu from `0.2` to `0.5` and switch from `color: "red"` to `color: "blue"` on `deployment/kubernetes/test/values.yaml`
-3. Push the changes to your branch `<YOUR-NAME>-gitops-workflow`
+3. Push the changes to your branch `dimitris-gitops-workflow`
 4. Observe how ArgoCD picks up the change (may take a couple minutes, you can alternative Hard Refresh to speed it up) and triggers a new deployment on Argo Rollouts
 ![](assets/argo_cd_progressing.png)
 
