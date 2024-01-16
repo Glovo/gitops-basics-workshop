@@ -2,7 +2,7 @@
 color: "blue"
 resources:
   requests:
-    cpu: 0.1
+    cpu: 0.05
     memory: 40M
   limits:
     memory: 512M
