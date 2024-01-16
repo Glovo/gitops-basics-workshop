@@ -1,5 +1,5 @@
 # sample-color-app-chart/values.yaml
-color: "red"
+color: "green"
 resources:
   requests:
     cpu: 0.2
