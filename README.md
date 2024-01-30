@@ -272,6 +272,10 @@ Kind:
 kind delete cluster --name gitops-workshop
 ```
 
+## Future Improvements
+
+- Adapt to KillerCoda
+
 ## License
 
 Copyright © 2024 Glovo
