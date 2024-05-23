@@ -12,8 +12,8 @@ resources:
   limits:
     memory: 512M
 autoscaling:
-  minReplicas: 1
-  maxReplicas: 1
+  minReplicas: 5
+  maxReplicas: 5
   targetCPUUtilizationPercentage: 60
 kind: blueGreen
 strategy:
