@@ -73,7 +73,7 @@ func getColorCode(color string) string {
 		return "#47B247"
 	case "blue":
 		return "#6FA8DC"
-	case "yellow":
+	case "pink":
 		return "#f8e098"
 	default:
 		return "#000000" // Default color (black)
